@@ -1,0 +1,8 @@
+{
+  "defaults": {
+    "HTTP_PORT": 8080,
+    "HTTPS_PORT": 4433,
+    "HTTPS_CERT": "/home/ikari/src/rview/packages/server/certs/localhost.pem",
+    "HTTPS_KEY": "/home/ikari/src/rview/packages/server/certs/localhost-key.pem"
+  }
+}
