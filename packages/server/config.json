@@ -4,5 +4,8 @@
     "HTTPS_PORT": 4433,
     "HTTPS_CERT": "/home/ikari/src/rview/packages/server/certs/localhost.pem",
     "HTTPS_KEY": "/home/ikari/src/rview/packages/server/certs/localhost-key.pem"
+  },
+  "session": {
+    "keys": ["928f9196-618d-4493-b77d-4f6f01b9c571", "79fa7625-392f-4d53-98b0-a5e2a218726e"]
   }
 }

@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import Koa from "koa";
+import session from "koa-session";
 import { config as dotenv } from "dotenv";
 import https from "node:https";
 import config from "../config.json" assert { type: "json" };
@@ -18,6 +19,10 @@ app.use(
     origin: "http://localhost:9000",
   }),
 );
+
+app.use(session(app));
+app.keys = config.session.keys;
+
 attachRouters(app);
 
 https

@@ -5,6 +5,7 @@ import { User } from "../../entity/user.js";
 import { getAccessToken } from "../anilist/access-token.js";
 import { getUserDetails } from "../anilist/user-details.js";
 import { IAnilistUser } from "../gql/types.js";
+import { AuthResponseDto } from "common";
 
 async function saveUserDetails(
   userDetails: IAnilistUser,
@@ -48,7 +49,12 @@ export async function handleCode(ctx: Context): Promise<void> {
   try {
     const accessToken = await getAccessToken(ctx.query.code as string);
     const userDetails = await getUserDetails(accessToken);
-    ctx.body = { userDetails };
+    const user = await saveUserDetails(userDetails, accessToken);
+
+    ctx.body = {
+      accessToken: accessToken,
+      profile: user.anilistUser,
+    } as AuthResponseDto;
   } catch (error) {
     ctx.status = 500;
     ctx.body = error;

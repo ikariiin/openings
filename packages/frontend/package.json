@@ -19,10 +19,12 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.25",
     "@types/webpack-dev-server": "^4.7.2",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
     "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
     "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -30,6 +32,7 @@
     "html-webpack-plugin": "^5.5.0",
     "prettier": "^2.7.1",
     "react-refresh": "^0.14.0",
+    "style-loader": "^3.3.1",
     "ts-loader": "^9.3.1",
     "ts-node": "^10.8.2",
     "type-fest": "^2.16.0",
@@ -39,10 +42,14 @@
     "webpack-dev-server": "^4.9.3"
   },
   "dependencies": {
+    "@fontsource/archivo": "^4.5.7",
+    "common": "*",
     "dotenv": "^16.0.1",
+    "material-symbols": "^0.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
+    "styled-components": "^5.3.5",
     "use-http": "^1.0.26"
   },
   "scripts": {
