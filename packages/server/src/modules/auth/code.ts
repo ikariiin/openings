@@ -1,11 +1,9 @@
 import { Context } from "koa";
 import { AppDataSource } from "../../data-source.js";
-import { AnilistProfile } from "../../entity/anilist-profile.js";
-import { User } from "../../entity/user.js";
 import { getAccessToken } from "../anilist/access-token.js";
 import { getUserDetails } from "../anilist/user-details.js";
 import { IAnilistUser } from "../gql/types.js";
-import { AuthResponseDto } from "common";
+import { AnilistProfile, AuthResponseDto, User } from "common";
 
 async function saveUserDetails(
   userDetails: IAnilistUser,
@@ -17,7 +15,7 @@ async function saveUserDetails(
   const preExistingUser = await userRepository.findOne({
     where: {
       anilistUser: {
-        name: userDetails.name,
+        anilistId: userDetails.id,
       },
     },
     relations: {
@@ -33,6 +31,7 @@ async function saveUserDetails(
   profile.name = userDetails.name;
   profile.largeAvatar = userDetails.avatar?.large ?? "";
   profile.mediumAvatar = userDetails.avatar?.medium ?? "";
+  profile.anilistId = userDetails.id;
 
   await profileRepository.save(profile);
 

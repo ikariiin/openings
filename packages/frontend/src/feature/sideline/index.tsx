@@ -1,7 +1,9 @@
 import { AuthResponseDto } from "common";
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Avatar } from "../../components/avatar";
+import { IconButton } from "./icon.button";
 
 const Container = styled.aside`
   position: fixed;
@@ -9,7 +11,6 @@ const Container = styled.aside`
   left: 0;
   width: 80px;
   height: 100%;
-  background: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,8 +18,9 @@ const Container = styled.aside`
   font-family: "ArchivoVariable", sans-serif;
 `;
 const Usernamne = styled.span`
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  font-weight: 500;
 `;
 const Icons = styled.div`
   flex-grow: 1;
@@ -27,19 +29,47 @@ const Icons = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const Icon = styled.span`
-  font-variation-settings: "FILL" 1, "wght" 100, "GRAD" -25, "opsz" 24;
-`;
 
 export const Sideline = ({ authData }: { authData: AuthResponseDto }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <Container>
       <Avatar imageUrl={authData.profile.mediumAvatar} size={56} />
       <Usernamne>{authData.profile.name}</Usernamne>
       <Icons>
-        <Icon className="material-symbols-outlined">search</Icon>
-        <Icon className="material-symbols-outlined">list</Icon>
-        <Icon className="material-symbols-outlined">logout</Icon>
+        <IconButton
+          icon="home"
+          label="Home"
+          onClick={() => {
+            navigate("/");
+          }}
+          active={location.pathname === "/"}
+        />
+        <IconButton
+          icon="search"
+          label="Search"
+          onClick={() => {
+            navigate("/search");
+          }}
+          active={location.pathname === "/search"}
+        />
+        <IconButton
+          icon="list"
+          label="Browse"
+          onClick={() => {
+            navigate("/browse");
+          }}
+          active={location.pathname === "/browse"}
+        />
+        <IconButton
+          icon="logout"
+          label="Logout"
+          onClick={() => {
+            //
+          }}
+        />
       </Icons>
     </Container>
   );

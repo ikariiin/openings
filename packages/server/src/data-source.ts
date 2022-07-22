@@ -1,7 +1,6 @@
 import { config } from "dotenv";
 import { DataSource } from "typeorm";
-import { AnilistProfile } from "./entity/anilist-profile.js";
-import { User } from "./entity/user.js";
+import { AnilistProfile, User } from "common";
 
 config();
 
@@ -15,7 +14,8 @@ export const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   synchronize: true,
-  logging: process.env.NODE_ENV === "development",
+  // logging: process.env.NODE_ENV === "development",
+  logging: false,
   entities: [User, AnilistProfile],
   subscribers: [],
   migrations: [],

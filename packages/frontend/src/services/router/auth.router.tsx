@@ -1,13 +1,21 @@
 import { AuthResponseDto } from "common";
 import React from "react";
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Home } from "../../feature/home";
+import { Main } from "../../feature/main";
 import { Sideline } from "../../feature/sideline";
 
 export const AuthRouter = ({ authData }: { authData: AuthResponseDto }) => {
   return (
     <BrowserRouter>
       <Sideline authData={authData} />
-      <Routes></Routes>
+      <Main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<div>search</div>} />
+          <Route path="/browse" element={<div>browse</div>} />
+        </Routes>
+      </Main>
     </BrowserRouter>
   );
 };

@@ -2,14 +2,13 @@ import { AuthResponseDto } from "common";
 import React from "react";
 import useFetch from "use-http";
 import config from "../../services/config/routes.json";
+import { apiUrl } from "../../services/misc/generate-api-url";
 import { getQueryParam } from "../../services/misc/url-query";
 import { saveStore } from "../../services/store";
 
 export const AuthPage = () => {
   const { loading, data = null } = useFetch<AuthResponseDto>(
-    `${process.env.API_BASE}${config["get-access-token"]}?code=${
-      getQueryParam("code") ?? ""
-    }`,
+    `${apiUrl(config["get-access-token"])}?code=${getQueryParam("code") ?? ""}`,
     {},
     [],
   );

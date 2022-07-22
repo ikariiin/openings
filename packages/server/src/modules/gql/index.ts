@@ -3,7 +3,7 @@ import statusCodes from "../misc/status-codes.js";
 
 export async function gqlRequest(
   query: string,
-  variables: Record<string, string> = {},
+  variables: Record<string, string | number> = {},
   authToken?: string,
 ): Promise<Record<string, unknown>> {
   const response = await fetch(`https://graphql.anilist.co`, {

@@ -14,6 +14,9 @@ export class AnilistProfile {
   public id!: number;
 
   @Column()
+  public anilistId!: number;
+
+  @Column()
   public name!: string;
 
   @Column()
