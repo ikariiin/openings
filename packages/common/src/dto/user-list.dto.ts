@@ -7,7 +7,7 @@ export class UserListMedia {
   @IsString()
   public bannerImage!: string;
 
-  public title!: { romaji: string };
+  public title!: { romaji: string; english: string };
 
   public coverImage!: { large: string; extraLarge: string };
 

@@ -1,4 +1,6 @@
 {
   "get-access-token": "/auth/code",
-  "get-user-list": "/anilist/user-list"
+  "get-user-list": "/anilist/user-list",
+  "get-openings": "/openings",
+  "get-audio": "/audio"
 }

@@ -9,6 +9,7 @@ const Container = styled.main<{ image: string }>`
   overflow-y: auto;
   background-color: ${(props) => props.theme.backgroundColor};
   background-size: cover;
+  position: relative;
 `;
 
 export const Main = ({ children }: { children: React.ReactNode }) => {

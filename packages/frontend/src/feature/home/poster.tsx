@@ -21,6 +21,7 @@ const PosterElement = styled.div<{ imageUrl: string }>`
 const Container = styled.section`
   background-color: ${(props) => props.theme.surfaceColor};
   border-radius: 18px;
+  cursor: pointer;
 `;
 
 const Label = styled.div`

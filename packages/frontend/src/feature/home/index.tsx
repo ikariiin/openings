@@ -3,21 +3,22 @@ import useFetch from "use-http";
 import { apiUrl } from "../../services/misc/generate-api-url";
 import { loadStore } from "../../services/store";
 import config from "../../services/config/routes.json";
-import { AuthResponseDto, UserListDto } from "common";
+import { AuthResponseDto, UserListDto, UserListEntry } from "common";
 import styled from "styled-components";
 import { Typography } from "../../components/typography";
 import { SectionBrowser } from "./section-browser";
 import { Poster } from "./poster";
 import { useAppState } from "../../services/context";
 import { actions } from "../../services/context/actions";
+import { Openings } from "./openings";
 
 const Container = styled.section`
-  display: grid;
-  grid-template-columns: 7fr 3fr;
+  display: flex;
 `;
 
 const Content = styled.div`
-  margin: 1.5rem;
+  margin: 0 1.5rem 1.5rem 1.5rem;
+  max-width: 70%;
 `;
 
 const PosterGrid = styled.div`
@@ -30,6 +31,8 @@ const PosterGrid = styled.div`
 export const Home = () => {
   const contentRef = React.useRef<HTMLDivElement>(null);
   const { dispatch } = useAppState();
+
+  const [selectedEntry, setSelectedEntry] = React.useState<UserListEntry>();
 
   const {
     loading,
@@ -55,8 +58,14 @@ export const Home = () => {
     return <Typography variant="h3">Data error</Typography>;
   }
 
-  function changeBackground(imageUrl: string): void {
-    dispatch({ type: actions.updateBackground, payload: imageUrl });
+  function selectEntry(entry: UserListEntry): void {
+    // Using extraLarge here as well because its probably already
+    // cached by the browser.
+    dispatch({
+      type: actions.updateBackground,
+      payload: entry.media.coverImage.extraLarge,
+    });
+    setSelectedEntry(entry);
   }
 
   function scrollToSection(sectionId: string) {
@@ -64,14 +73,10 @@ export const Home = () => {
       return;
     }
 
-    const element = contentRef.current.querySelector(sectionId);
-    if (!element) {
-      return;
-    }
-    const { top } = element.getBoundingClientRect();
-
     document.querySelector("#main-scroll-container")?.scrollTo({
-      top: top - 100,
+      top:
+        (contentRef.current.querySelector(sectionId) as HTMLElement)
+          ?.offsetTop - 100,
       behavior: "smooth",
     });
   }
@@ -79,7 +84,14 @@ export const Home = () => {
   return (
     <Container>
       <Content ref={contentRef}>
-        <div style={{ height: 275 }} />
+        <SectionBrowser
+          sectionMap={data
+            .map((data) => ({
+              [data.name]: `page-loc-${data.name.replace(/\s/g, "-")}`,
+            }))
+            .reduce((acc, curr) => ({ ...acc, ...curr }), {})}
+          onClick={(sectionId) => scrollToSection(sectionId)}
+        />
         <Typography variant="h1" customGutterBottom={2}>
           Your shows
         </Typography>
@@ -98,9 +110,7 @@ export const Home = () => {
                   key={entry.id}
                   entry={entry}
                   onClick={(entry) => {
-                    // Using extraLarge here as well because its probably already
-                    // cached by the browser.
-                    changeBackground(entry.media.coverImage.extraLarge);
+                    selectEntry(entry);
                   }}
                 />
               ))}
@@ -108,14 +118,7 @@ export const Home = () => {
           </>
         ))}
       </Content>
-      <SectionBrowser
-        sectionMap={data
-          .map((data) => ({
-            [data.name]: `page-loc-${data.name.replace(/\s/g, "-")}`,
-          }))
-          .reduce((acc, curr) => ({ ...acc, ...curr }), {})}
-        onClick={(sectionId) => scrollToSection(sectionId)}
-      />
+      <Openings media={selectedEntry?.media} />
     </Container>
   );
 };

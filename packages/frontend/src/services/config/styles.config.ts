@@ -1,5 +1,5 @@
 export default {
-  fontFamily: `"ArchivoVariable", sans-serif`,
+  fontFamily: `"ManropeVariable", sans-serif`,
   fontSize: "16px",
   sideline: {
     iconContainer: {

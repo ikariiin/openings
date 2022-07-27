@@ -1,5 +1,8 @@
 const actions = {
   updateBackground: "updateBackground",
+  updateBannerImage: "updateBannerImage",
+  playSong: "playSong",
+  updateAudioProp: "updateAudioProp",
 } as const;
 
 export { actions };

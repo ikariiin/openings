@@ -20,7 +20,8 @@ export async function getUserMediaCollection(
             priority,
             media {
               title {
-                romaji
+                romaji,
+                english
               },
               coverImage {
                 large,

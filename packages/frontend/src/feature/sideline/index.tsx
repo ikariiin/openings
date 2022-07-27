@@ -15,7 +15,6 @@ const Container = styled.aside`
   flex-direction: column;
   align-items: center;
   padding: 1rem 0;
-  font-family: "ArchivoVariable", sans-serif;
 `;
 const Usernamne = styled.span`
   font-size: 0.75rem;

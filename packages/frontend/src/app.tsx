@@ -2,6 +2,7 @@ import React from "react";
 import { DefaultTheme, ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./components/global-style";
 import { defaultTypography } from "./components/typography/default";
+import { Player } from "./feature/audio/player";
 import { AppStateProvider, useAppState } from "./services/context";
 import { Router } from "./services/router";
 import { generateTheme } from "./services/theme";
@@ -30,6 +31,7 @@ export const StatefulApp = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Player />
       <GlobalStyles />
       <Router />
     </ThemeProvider>

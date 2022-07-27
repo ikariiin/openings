@@ -75,8 +75,10 @@ declare module "styled-components" {
     backgroundColor: string;
     textColor: string;
     secondaryContainer: string;
+    secondaryContainerVariant: string;
     textColorMuted: string;
     typography: TypographyTheme;
     surfaceColor: string;
+    primaryContainer: string;
   }
 }

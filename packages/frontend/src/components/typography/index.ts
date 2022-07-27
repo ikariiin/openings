@@ -17,12 +17,14 @@ export interface TypographyProps {
     | "overline";
   gutterBottom?: boolean;
   customGutterBottom?: number;
+  align?: "left" | "center" | "right";
 }
 
 export const Typography = styled.div<TypographyProps>`
   font-size: ${(props) => props.theme.typography[props.variant].fontSize};
   line-height: ${(props) => props.theme.typography[props.variant].lineHeight};
   font-weight: ${(props) => props.theme.typography[props.variant].fontWeight};
+  text-align: left;
   ${(props) =>
     props.gutterBottom &&
     css`
@@ -32,5 +34,11 @@ export const Typography = styled.div<TypographyProps>`
     props.customGutterBottom &&
     css`
       margin-bottom: ${props.customGutterBottom}rem;
+    `}
+
+  ${(props) =>
+    props.align &&
+    css`
+      text-align: ${props.align};
     `}
 `;
