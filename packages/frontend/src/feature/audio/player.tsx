@@ -4,6 +4,7 @@ import { useAppState } from "../../services/context";
 import { actions } from "../../services/context/actions";
 import { Seekbar } from "../../components/player/seekbar";
 import { Banner } from "../../components/player/banner";
+import { Volume } from "../../components/player/volume";
 
 const AudioElement = styled.audio`
   width: 1px;
@@ -27,7 +28,9 @@ const PlayerContainer = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 1rem;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
 `;
 
 export const Player = () => {
@@ -97,7 +100,6 @@ export const Player = () => {
   React.useEffect(() => {
     if (audioRef.current) {
       state.audio.playing ? audioRef.current.play() : audioRef.current.pause();
-      audioRef.current.volume = 0.1;
     }
   }, [state.audio.playing, audioRef.current]);
 
@@ -151,6 +153,17 @@ export const Player = () => {
             if (audioRef.current) {
               audioRef.current.currentTime = value;
             }
+          }}
+        />
+        <Volume
+          volume={state.audio.volume}
+          onChange={(value) => {
+            dispatch({
+              type: actions.updateAudioProp,
+              payload: {
+                volume: value,
+              },
+            });
           }}
         />
       </Content>

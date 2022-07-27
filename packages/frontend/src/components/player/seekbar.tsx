@@ -6,11 +6,18 @@ import { Typography } from "../typography";
 
 const SeekbarContainer = styled.div`
   display: flex;
+  flex-grow: 1;
+  line-height: 1;
 `;
 
-export const SliderContainer = styled.div`
+const SliderContainer = styled.div`
   flex-grow: 1;
   margin: 0 1rem;
+`;
+
+const DurationContainer = styled.div`
+  width: 38px;
+  text-align: center;
 `;
 
 export interface SeekbarProps {
@@ -41,7 +48,9 @@ export const Seekbar = ({ currentTime, duration, onChange }: SeekbarProps) => {
 
   return (
     <SeekbarContainer>
-      <Typography variant="caption">{formattedCurrentTime}</Typography>
+      <DurationContainer>
+        <Typography variant="caption">{formattedCurrentTime}</Typography>
+      </DurationContainer>
       <SliderContainer>
         <Slider
           handleStyle={{
@@ -64,7 +73,9 @@ export const Seekbar = ({ currentTime, duration, onChange }: SeekbarProps) => {
           }}
         />
       </SliderContainer>
-      <Typography variant="caption">{formattedDuration}</Typography>
+      <DurationContainer>
+        <Typography variant="caption">{formattedDuration}</Typography>
+      </DurationContainer>
     </SeekbarContainer>
   );
 };

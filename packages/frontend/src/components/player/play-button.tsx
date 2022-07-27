@@ -1,5 +1,6 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import { Icon } from "../icon";
 
 const Container = styled.button`
   background-color: ${(props) => props.theme.primaryColor};
@@ -16,14 +17,6 @@ const Container = styled.button`
   &:hover {
     transform: scale(1.15);
   }
-`;
-
-const Icon = styled.span<{ filled?: boolean }>`
-  ${(props) => css`
-    font-variation-settings: "FILL" ${props.filled ? 1 : 0}, "wght" 300,
-      "GRAD" -25, "opsz" 24;
-    color: ${props.filled ? props.theme.textColor : props.theme.textColorMuted};
-  `}
 `;
 
 export interface PlayButtonProps {
