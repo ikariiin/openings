@@ -14,11 +14,19 @@ const Container = styled.section`
   display: flex;
   height: 80px;
   align-items: center;
-  width: 100%;
+  width: calc(100% - 2rem);
   overflow-x: auto;
   flex-wrap: nowrap;
   background-color: ${(props) => props.theme.backgroundColor};
-  border-bottom: 2px solid ${(props) => props.theme.textColorMuted};
+  border: 2px solid ${(props) => props.theme.primaryColor};
+  border-top: none;
+  border-radius: 0 0 22px 22px;
+  padding: 0 1rem;
+  z-index: 5;
+`;
+
+const Title = styled.div`
+  flex-grow: 1;
 `;
 
 const Pill = styled.div`
@@ -34,6 +42,11 @@ const Pill = styled.div`
 export const SectionBrowser = (props: SectionBrowserProps) => {
   return (
     <Container>
+      <Title>
+        <Typography variant="h2" lineHeight={1}>
+          Your songs
+        </Typography>
+      </Title>
       {Object.keys(props.sectionMap).map((key) => {
         return (
           <Pill

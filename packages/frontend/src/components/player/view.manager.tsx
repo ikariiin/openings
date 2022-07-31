@@ -20,7 +20,6 @@ export const ViewManager = ({ view, onViewChange }: ViewManagerProps) => {
   React.useEffect(() => {
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
-      console.log("rect> ", rect);
       setMenuAnchorPos({
         bottom: window.innerHeight - rect.top,
         right: window.innerWidth - rect.left,

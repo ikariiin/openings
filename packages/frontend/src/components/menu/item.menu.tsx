@@ -11,13 +11,13 @@ const Container = styled.div<{ selected?: boolean }>`
   transition: all 125ms ease-in-out;
 
   &:hover {
-    background-color: ${(props) => props.theme.secondaryContainerVariant};
+    background-color: ${(props) => props.theme.textColor}14;
   }
 
   ${(props) =>
     props.selected &&
     `
-    background-color: ${props.theme.secondaryContainerVariant};
+    background-color: ${props.theme.textColor}1f;
   `}
 
   &:first-child {
@@ -37,7 +37,7 @@ const IconContainer = styled.div`
 
 const Label = styled.div`
   font-size: 0.95rem;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.2px;
 `;
 
 export interface MenuItemProps {

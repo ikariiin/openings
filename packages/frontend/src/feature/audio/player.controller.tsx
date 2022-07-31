@@ -1,7 +1,8 @@
 import React from "react";
 import { PlayerView, useAudioState } from "../../services/context/audio";
 import { audioActions } from "../../services/context/audio.actions";
-import { FloatingPlayer } from "./player";
+import { BottomFixedPlayer } from "./player.bottom";
+import { FloatingPlayer } from "./player.floating";
 
 export interface PlayerProps {
   view: PlayerView;
@@ -12,17 +13,24 @@ export interface PlayerProps {
 export const Player = () => {
   const { state, dispatch } = useAudioState();
 
-  return (
-    <>
-      <FloatingPlayer
-        view={state.playerView}
-        onViewChange={(view) =>
-          dispatch({
-            type: audioActions.changePlayerView,
-            payload: view,
-          })
-        }
-      />
-    </>
-  );
+  const changeView = (view: PlayerView) =>
+    dispatch({
+      type: audioActions.changePlayerView,
+      payload: view,
+    });
+
+  switch (state.playerView) {
+    case PlayerView.Floating:
+      return (
+        <FloatingPlayer view={state.playerView} onViewChange={changeView} />
+      );
+    case PlayerView.Fullscreen:
+      return (
+        <FloatingPlayer view={state.playerView} onViewChange={changeView} />
+      );
+    case PlayerView.BottomFixed:
+      return (
+        <BottomFixedPlayer view={state.playerView} onViewChange={changeView} />
+      );
+  }
 };

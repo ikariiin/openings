@@ -119,6 +119,7 @@ export const Openings = (props: OpeningsProps) => {
             title="Openings"
             songs={data.openings}
             banner={props.media?.bannerImage ?? ""}
+            poster={props.media?.coverImage.extraLarge ?? ""}
           />
         )}
         {data.endings.length > 0 && (
@@ -126,6 +127,7 @@ export const Openings = (props: OpeningsProps) => {
             title="Endings"
             songs={data.endings}
             banner={props.media?.bannerImage ?? ""}
+            poster={props.media?.coverImage.extraLarge ?? ""}
           />
         )}
         {data.inserts.length > 0 && (
@@ -133,6 +135,7 @@ export const Openings = (props: OpeningsProps) => {
             title="Inserts"
             songs={data.inserts}
             banner={props.media?.bannerImage ?? ""}
+            poster={props.media?.coverImage.extraLarge ?? ""}
           />
         )}
       </ListContainer>

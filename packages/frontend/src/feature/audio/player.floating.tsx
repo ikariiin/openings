@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { actions } from "../../services/context/actions";
 import { Seekbar } from "../../components/player/seekbar";
-import { Banner } from "../../components/player/banner";
+import { Banner } from "../../components/player/floating/banner";
 import { Volume } from "../../components/player/volume";
 import { useAudioState } from "../../services/context/audio";
 import { PlayerProps } from "./player.controller";

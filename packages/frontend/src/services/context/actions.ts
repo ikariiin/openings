@@ -3,6 +3,7 @@ const actions = {
   updateBannerImage: "updateBannerImage",
   playSong: "playSong",
   updateAudioProp: "updateAudioProp",
+  selectMedia: "selectMedia",
 } as const;
 
 export { actions };

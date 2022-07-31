@@ -18,11 +18,13 @@ export interface TypographyProps {
   gutterBottom?: boolean;
   customGutterBottom?: number;
   align?: "left" | "center" | "right";
+  lineHeight?: number;
 }
 
 export const Typography = styled.div<TypographyProps>`
   font-size: ${(props) => props.theme.typography[props.variant].fontSize};
-  line-height: ${(props) => props.theme.typography[props.variant].lineHeight};
+  line-height: ${(props) =>
+    props.lineHeight || props.theme.typography[props.variant].lineHeight};
   font-weight: ${(props) => props.theme.typography[props.variant].fontWeight};
   text-align: left;
   ${(props) =>

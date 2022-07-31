@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Typography } from "../typography";
+import { Typography } from "../../typography";
 import { PlayButton } from "./play-button";
 
 const Container = styled.div<{ banner: string }>`

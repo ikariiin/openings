@@ -6,4 +6,6 @@ export default {
       borderRadius: "20px",
     },
   },
+  bottomFixedPlayerHeight: "90px",
+  bannerWidth: "20vw",
 };

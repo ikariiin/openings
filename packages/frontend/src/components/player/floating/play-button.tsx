@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Icon } from "../icon";
+import { Icon } from "../../icon";
 
 const Container = styled.button`
   background-color: ${(props) => props.theme.primaryColor};

@@ -8,31 +8,39 @@ import styled from "styled-components";
 import { Typography } from "../../components/typography";
 import { SectionBrowser } from "./section-browser";
 import { Poster } from "./poster";
+import { Openings } from "./openings";
 import { useAppState } from "../../services/context";
 import { actions } from "../../services/context/actions";
-import { Openings } from "./openings";
+import { useAudioState } from "../../services/context/audio";
+import { Banner } from "../../components/banner";
+import { NavLink, useNavigate } from "react-router-dom";
+import stylesConfig from "../../services/config/styles.config";
 
 const Container = styled.section`
   display: flex;
 `;
 
 const Content = styled.div`
-  margin: 0 1.5rem 1.5rem 1.5rem;
-  max-width: 70%;
+  margin: 0 1.5rem 1.5rem 0;
+  width: 100%;
 `;
 
 const PosterGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   grid-gap: 1rem;
   margin-bottom: 2.5rem;
 `;
 
+const GridContainer = styled.section`
+  margin: 1.5rem 1.5rem 1.5rem calc(${stylesConfig.bannerWidth} + 1.5rem);
+`;
+
 export const Home = () => {
   const contentRef = React.useRef<HTMLDivElement>(null);
-  const { dispatch } = useAppState();
 
-  const [selectedEntry, setSelectedEntry] = React.useState<UserListEntry>();
+  const { state: appState, dispatch } = useAppState();
+  const navigate = useNavigate();
 
   const {
     loading,
@@ -61,11 +69,14 @@ export const Home = () => {
   function selectEntry(entry: UserListEntry): void {
     // Using extraLarge here as well because its probably already
     // cached by the browser.
+    // dispatch({
+    //   type: actions.updateBackground,
+    //   payload: entry.media.coverImage.extraLarge,
+    // });
     dispatch({
-      type: actions.updateBackground,
-      payload: entry.media.coverImage.extraLarge,
+      type: actions.selectMedia,
+      payload: entry.media,
     });
-    setSelectedEntry(entry);
   }
 
   function scrollToSection(sectionId: string) {
@@ -92,33 +103,36 @@ export const Home = () => {
             .reduce((acc, curr) => ({ ...acc, ...curr }), {})}
           onClick={(sectionId) => scrollToSection(sectionId)}
         />
-        <Typography variant="h1" customGutterBottom={2}>
-          Your shows
-        </Typography>
-        {data.map((group) => (
-          <>
-            <Typography
-              variant="h2"
-              customGutterBottom={1.5}
-              id={`page-loc-${group.name.replace(/\s/g, "-")}`}
-            >
-              {group.name}
-            </Typography>
-            <PosterGrid>
-              {group.entries.map((entry) => (
-                <Poster
-                  key={entry.id}
-                  entry={entry}
-                  onClick={(entry) => {
-                    selectEntry(entry);
-                  }}
-                />
-              ))}
-            </PosterGrid>
-          </>
-        ))}
+        <Banner />
+        <GridContainer>
+          {data.map((group) => (
+            <>
+              <Typography
+                variant="h3"
+                customGutterBottom={1.5}
+                id={`page-loc-${group.name.replace(/\s/g, "-")}`}
+              >
+                {group.name}
+              </Typography>
+              <PosterGrid>
+                {group.entries.map((entry) => (
+                  <>
+                    <Poster
+                      key={entry.id}
+                      entry={entry}
+                      onClick={(entry) => {
+                        selectEntry(entry);
+                        navigate(`/media/${entry.media.id}`);
+                      }}
+                    />
+                  </>
+                ))}
+              </PosterGrid>
+            </>
+          ))}
+        </GridContainer>
       </Content>
-      <Openings media={selectedEntry?.media} />
+      {/* <Openings media={appState.selectedMedia ?? undefined} /> */}
     </Container>
   );
 };

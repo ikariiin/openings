@@ -19,6 +19,7 @@ export async function getUserMediaCollection(
             id,
             priority,
             media {
+              id,
               title {
                 romaji,
                 english

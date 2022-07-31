@@ -6,6 +6,7 @@ import { apiUrl } from "../../services/misc/generate-api-url";
 import { Typography } from "../typography";
 import routes from "../../services/config/routes.json";
 import { useAudioState } from "../../services/context/audio";
+import { useAppState } from "../../services/context";
 
 const Container = styled.ul`
   list-style: none;
@@ -31,10 +32,12 @@ export interface ListProps {
   songs: Array<SongEntry>;
   banner: string;
   title: string;
+  poster: string;
 }
 
 export const List = (props: ListProps) => {
-  const { dispatch } = useAudioState();
+  const { dispatch: audioStateDispatch } = useAudioState();
+  const { dispatch: appStateDispatch } = useAppState();
 
   return (
     <>
@@ -45,7 +48,7 @@ export const List = (props: ListProps) => {
             key={song.gid}
             role="button"
             onClick={() => {
-              dispatch({
+              audioStateDispatch({
                 type: actions.playSong,
                 payload: {
                   src: `${apiUrl(
@@ -54,7 +57,11 @@ export const List = (props: ListProps) => {
                   title: song.title,
                 },
               });
-              dispatch({
+              appStateDispatch({
+                type: actions.updateBackground,
+                payload: props.poster,
+              });
+              audioStateDispatch({
                 type: actions.updateBannerImage,
                 payload: props.banner,
               });
