@@ -79,6 +79,7 @@ declare module "styled-components" {
     textColorMuted: string;
     typography: TypographyTheme;
     surfaceColor: string;
+    surfaceColorVariant: string;
     primaryContainer: string;
   }
 }

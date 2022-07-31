@@ -55,6 +55,8 @@ export const Volume = ({ volume, onChange }: VolumeProps) => {
             borderColor: theme.primaryColor,
             opacity: 1,
             boxShadow: "none",
+            height: "12px",
+            marginTop: "-4px",
           }}
           trackStyle={{
             backgroundColor: theme.primaryColor,

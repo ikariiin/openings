@@ -1,11 +1,11 @@
 import { SongEntry } from "common";
 import React from "react";
 import styled from "styled-components";
-import { useAppState } from "../../services/context";
 import { actions } from "../../services/context/actions";
 import { apiUrl } from "../../services/misc/generate-api-url";
 import { Typography } from "../typography";
 import routes from "../../services/config/routes.json";
+import { useAudioState } from "../../services/context/audio";
 
 const Container = styled.ul`
   list-style: none;
@@ -34,7 +34,7 @@ export interface ListProps {
 }
 
 export const List = (props: ListProps) => {
-  const { dispatch } = useAppState();
+  const { dispatch } = useAudioState();
 
   return (
     <>

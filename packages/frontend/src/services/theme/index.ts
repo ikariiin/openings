@@ -20,6 +20,10 @@ export const generateTheme = async (
     textColor: Color(palette.DarkVibrant?.hex).darken(0.4).hex(),
     textColorMuted: Color(palette.DarkVibrant?.hex).lighten(0.2).hex(),
     surfaceColor: Color(palette.LightVibrant?.hex).desaturate(0.1).hex(),
+    surfaceColorVariant: Color(palette.LightVibrant?.hex)
+      .desaturate(0.1)
+      .lighten(0.1)
+      .hex(),
     typography: defaultTypography,
   };
 };

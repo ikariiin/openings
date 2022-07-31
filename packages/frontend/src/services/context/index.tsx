@@ -2,35 +2,18 @@ import * as React from "react";
 import { ActionValues } from "./actions";
 import { appStateReducer } from "./reducer";
 
+// TODO: Create separate stores for audio and other related data.
+
 export type Action = { type: ActionValues; payload?: unknown };
 // eslint-disable-next-line no-unused-vars
 export type Dispatch = (action: Action) => unknown;
-export type AudioState = {
-  playing: boolean;
-  volume: number;
-  duration: number;
-  src: string;
-  bufferring: boolean;
-  title: string;
-};
 export type State = {
-  audio: AudioState;
   background: string;
-  bannerImage: string;
 };
 export type AppStateProviderProps = { children: React.ReactNode };
 
 const defaultState: State = {
-  audio: {
-    playing: false,
-    volume: 0.5,
-    duration: 0,
-    src: "",
-    bufferring: false,
-    title: "",
-  },
   background: "https://i.imgur.com/13L2elC.jpg",
-  bannerImage: "https://i.imgur.com/13L2elC.jpg",
 };
 
 const AppStateContext = React.createContext<{

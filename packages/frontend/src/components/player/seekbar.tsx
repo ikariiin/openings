@@ -7,7 +7,6 @@ import { Typography } from "../typography";
 const SeekbarContainer = styled.div`
   display: flex;
   flex-grow: 1;
-  line-height: 1;
 `;
 
 const SliderContainer = styled.div`
@@ -58,6 +57,9 @@ export const Seekbar = ({ currentTime, duration, onChange }: SeekbarProps) => {
             borderColor: theme.primaryColor,
             opacity: 1,
             boxShadow: "none",
+            width: "12px",
+            height: "12px",
+            marginTop: "-4px",
           }}
           trackStyle={{
             backgroundColor: theme.primaryColor,
