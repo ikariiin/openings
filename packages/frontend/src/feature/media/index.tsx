@@ -20,10 +20,6 @@ const ListContainer = styled.section`
   margin: 1rem;
 `;
 
-const Main = styled.section`
-  flex-grow: 1;
-`;
-
 export const Media = () => {
   const { id } = useParams();
   const [media, setMedia] = React.useState<UserListMedia | null>(null);

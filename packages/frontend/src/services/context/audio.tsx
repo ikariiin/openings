@@ -9,7 +9,6 @@ export type AudioDispatch = (action: AudioAction) => unknown;
 
 export enum PlayerView {
   Floating,
-  Fullscreen,
   BottomFixed,
 }
 
@@ -33,7 +32,7 @@ const defaultState: AudioState = {
   src: "",
   bufferring: false,
   title: "",
-  bannerImage: "https://i.imgur.com/13L2elC.jpg",
+  bannerImage: "https://i.imgur.com/91Vv2CH.jpg",
   playerView: PlayerView.Floating,
 };
 

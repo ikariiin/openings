@@ -54,14 +54,14 @@ export const Sideline = ({ authData }: { authData: AuthResponseDto }) => {
           }}
           active={location.pathname === "/search"}
         />
-        <IconButton
+        {/* <IconButton
           icon="list"
           label="Browse"
           onClick={() => {
             navigate("/browse");
           }}
           active={location.pathname === "/browse"}
-        />
+        /> */}
         <IconButton
           icon="logout"
           label="Logout"

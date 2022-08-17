@@ -11,3 +11,6 @@ RUN yarn workspace common build
 RUN yarn workspace server build
 RUN yarn workspace frontend build
 
+CMD ["yarn", "start-server"]
+
+EXPOSE 443

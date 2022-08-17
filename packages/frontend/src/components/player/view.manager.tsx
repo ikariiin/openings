@@ -31,8 +31,6 @@ export const ViewManager = ({ view, onViewChange }: ViewManagerProps) => {
     switch (view) {
       case PlayerView.Floating:
         return "picture_in_picture_alt";
-      case PlayerView.Fullscreen:
-        return "fullscreen";
       case PlayerView.BottomFixed:
         return "vertical_align_bottom";
     }
@@ -58,15 +56,6 @@ export const ViewManager = ({ view, onViewChange }: ViewManagerProps) => {
                 onViewChange(PlayerView.Floating);
                 setShowMenu(false);
               },
-            },
-            {
-              label: "Fullscreen",
-              onClick: () => {
-                onViewChange(PlayerView.Fullscreen);
-                setShowMenu(false);
-              },
-              icon: "fullscreen",
-              selected: view === PlayerView.Fullscreen,
             },
             {
               label: "Bottom Fixed",

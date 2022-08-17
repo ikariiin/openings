@@ -8,13 +8,11 @@ import styled from "styled-components";
 import { Typography } from "../../components/typography";
 import { SectionBrowser } from "./section-browser";
 import { Poster } from "./poster";
-import { Openings } from "./openings";
 import { useAppState } from "../../services/context";
 import { actions } from "../../services/context/actions";
-import { useAudioState } from "../../services/context/audio";
 import { Banner } from "../../components/banner";
-import { NavLink, useNavigate } from "react-router-dom";
 import stylesConfig from "../../services/config/styles.config";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.section`
   display: flex;
@@ -39,7 +37,7 @@ const GridContainer = styled.section`
 export const Home = () => {
   const contentRef = React.useRef<HTMLDivElement>(null);
 
-  const { state: appState, dispatch } = useAppState();
+  const { dispatch } = useAppState();
   const navigate = useNavigate();
 
   const {

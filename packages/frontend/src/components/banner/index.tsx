@@ -18,7 +18,7 @@ const Image = styled.div<{ image: string }>`
   height: ${stylesConfig.bannerWidth};
   background-image: url(${(props) => props.image});
   background-position: center;
-  /* border-radius: 22px; */
+  border-radius: 0 0 0 22px;
 `;
 
 export const Banner = ({ noTopOffset }: { noTopOffset?: boolean }) => {

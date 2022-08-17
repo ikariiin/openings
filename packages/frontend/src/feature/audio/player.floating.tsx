@@ -1,22 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { actions } from "../../services/context/actions";
 import { Seekbar } from "../../components/player/seekbar";
 import { Banner } from "../../components/player/floating/banner";
 import { Volume } from "../../components/player/volume";
 import { useAudioState } from "../../services/context/audio";
 import { PlayerProps } from "./player.controller";
 import { ViewManager } from "../../components/player/view.manager";
-
-const AudioElement = styled.audio`
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  position: fixed;
-  z-index: -9999;
-  top: -9999px;
-  left: -9999px;
-`;
+import { audioActions } from "../../services/context/audio.actions";
 
 const PlayerContainer = styled.div`
   position: fixed;
@@ -38,9 +28,12 @@ const Content = styled.div`
   align-items: center;
 `;
 
-export const FloatingPlayer = ({ view, onViewChange }: PlayerProps) => {
+export const FloatingPlayer = ({
+  view,
+  onViewChange,
+  audioRef,
+}: PlayerProps) => {
   const { state, dispatch } = useAudioState();
-  const audioRef = React.useRef<HTMLAudioElement>(null);
 
   const [currentTime, setCurrentTime] = React.useState(0);
 
@@ -52,15 +45,6 @@ export const FloatingPlayer = ({ view, onViewChange }: PlayerProps) => {
       return;
     }
 
-    audioRef.current.addEventListener("ended", () => {
-      dispatch({
-        type: actions.updateAudioProp,
-        payload: {
-          playing: false,
-        },
-      });
-    });
-
     audioRef.current.addEventListener("timeupdate", () => {
       if (!audioRef.current) {
         return;
@@ -68,45 +52,7 @@ export const FloatingPlayer = ({ view, onViewChange }: PlayerProps) => {
 
       setCurrentTime(audioRef.current.currentTime);
     });
-
-    audioRef.current.addEventListener("loadedmetadata", () => {
-      if (!audioRef.current) {
-        return;
-      }
-
-      dispatch({
-        type: actions.updateAudioProp,
-        payload: {
-          duration: audioRef.current.duration,
-        },
-      });
-    });
   }, [audioRef.current]);
-
-  React.useEffect(() => {
-    if (
-      audioRef.current &&
-      state.src !== "" &&
-      state.src !== audioRef.current.src
-    ) {
-      audioRef.current.src = state.src;
-      audioRef.current.load();
-      audioRef.current.currentTime = 0;
-      audioRef.current.play();
-    }
-  }, [state.src, audioRef.current]);
-
-  React.useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = state.volume;
-    }
-  }, [state.volume, audioRef.current]);
-
-  React.useEffect(() => {
-    if (audioRef.current) {
-      state.playing ? audioRef.current.play() : audioRef.current.pause();
-    }
-  }, [state.playing, audioRef.current]);
 
   React.useEffect(() => {
     setSongArtist(
@@ -122,7 +68,7 @@ export const FloatingPlayer = ({ view, onViewChange }: PlayerProps) => {
 
   const togglePlay = () => {
     dispatch({
-      type: actions.updateAudioProp,
+      type: audioActions.updateAudioProp,
       payload: {
         playing: !state.playing,
       },
@@ -131,7 +77,6 @@ export const FloatingPlayer = ({ view, onViewChange }: PlayerProps) => {
 
   return (
     <PlayerContainer>
-      <AudioElement ref={audioRef} />
       <Banner
         image={state.bannerImage}
         onTogglePlay={togglePlay}
@@ -153,7 +98,7 @@ export const FloatingPlayer = ({ view, onViewChange }: PlayerProps) => {
           volume={state.volume}
           onChange={(value) => {
             dispatch({
-              type: actions.updateAudioProp,
+              type: audioActions.updateAudioProp,
               payload: {
                 volume: value,
               },

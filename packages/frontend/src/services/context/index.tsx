@@ -13,7 +13,7 @@ export type State = {
 export type AppStateProviderProps = { children: React.ReactNode };
 
 const defaultState: State = {
-  background: "https://i.imgur.com/13L2elC.jpg",
+  background: "https://i.imgur.com/91Vv2CH.jpg",
   selectedMedia: null,
 };
 

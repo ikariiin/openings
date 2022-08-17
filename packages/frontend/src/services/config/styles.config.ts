@@ -7,5 +7,6 @@ export default {
     },
   },
   bottomFixedPlayerHeight: "90px",
-  bannerWidth: "20vw",
+  bannerWidth: "25vw",
+  coverArtSize: "50px",
 };

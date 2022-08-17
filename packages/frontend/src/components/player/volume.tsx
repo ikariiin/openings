@@ -18,8 +18,8 @@ const IconButton = styled.button`
   margin-bottom: -4px;
 `;
 
-const VolumeTracContainer = styled.div`
-  width: 80px;
+const VolumeTrackContainer = styled.div<{ width?: number }>`
+  width: ${(props) => props.width || 80}px;
   display: flex;
   align-items: center;
 `;
@@ -28,9 +28,10 @@ export interface VolumeProps {
   volume: number;
   // eslint-disable-next-line no-unused-vars
   onChange: (volume: number) => unknown;
+  width?: number;
 }
 
-export const Volume = ({ volume, onChange }: VolumeProps) => {
+export const Volume = ({ volume, onChange, width }: VolumeProps) => {
   const theme = useTheme();
 
   return (
@@ -48,7 +49,7 @@ export const Volume = ({ volume, onChange }: VolumeProps) => {
           {volume === 0 ? "volume_off" : "volume_up"}
         </Icon>
       </IconButton>
-      <VolumeTracContainer>
+      <VolumeTrackContainer width={width}>
         <Slider
           handleStyle={{
             backgroundColor: theme.primaryColor,
@@ -70,7 +71,7 @@ export const Volume = ({ volume, onChange }: VolumeProps) => {
             onChange(value / 100);
           }}
         />
-      </VolumeTracContainer>
+      </VolumeTrackContainer>
     </Container>
   );
 };

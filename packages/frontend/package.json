@@ -64,6 +64,7 @@
     "use-http": "^1.0.26"
   },
   "scripts": {
-    "start:dev": "webpack-dev-server --progress"
+    "start:dev": "webpack-dev-server --progress",
+    "build": "webpack --progress --mode production"
   }
 }
