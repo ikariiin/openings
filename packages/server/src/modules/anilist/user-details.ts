@@ -6,6 +6,7 @@ export async function getUserDetails(token: string): Promise<IAnilistUser> {
   const query = `
     query {
       Viewer {
+        id,
         name,
         avatar {
           large,
